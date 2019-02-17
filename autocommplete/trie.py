@@ -1,11 +1,11 @@
 
-# import pprint
-# pp = pprint.PrettyPrinter(indent=4)
+import pprint
+
 class Trie:
     def __init__(self):
-        return
+        self.head = {}
 
-    head = {}
+
                 # this represents the starting point for searching, adding, or removing words or sentences,
                 # it store a reference to the starting letter to track down ( in later methods like add or search)
                 # each letter that is seen will hold a dictionary of letters that reference other letters,
@@ -101,9 +101,12 @@ class Trie:
         for ch in word: #For every character in the word that we are trying adding to the dictionary
             if ch not in curr: #Iterate over the list of keys in self.head/ the current dictionary were on and if the character isnt in the keys
                 curr[ch] = {}   # we add it as another  dictionary
-                print(curr)  # Check to see the current dictionary were on and what keys it has
-            curr = curr[ch]  #  Either way check for the next iteration of the for loop it wil now reference
+                # print(curr)  # Check to see the current dictionary were on and what keys it has
+            curr = curr[ch] #  Either way check for the next iteration of the for loop it wil now reference
+
         curr["*"]= True
+        # pprint.pprint(self.head)
+        # pprint.pprint(curr)
 
 
     def search(self, search_word):
@@ -117,8 +120,22 @@ class Trie:
             curr = curr[char]   # if it is in the keys then for the nest letter its curr will be a list of keys that it was found
                                 # having dropped into its dictionary via the add method
 
+        # pprint.pprint(self.head)
+        # pprint.pprint(curr)
+        if "*" in curr:
+            return True
+        else:
+            return False
+
 
 if __name__ == "__main__":
         trieTest = Trie()
         print(trieTest.head)
-        trieTest.search("word")
+        # trieTest.search("word")
+        trieTest.add("add")
+        # pprint.pprint(trieTest.head)
+        trieTest.add("addiction")
+        # pprint.pprint(trieTest.head)
+        print(trieTest.search("add"))
+
+
