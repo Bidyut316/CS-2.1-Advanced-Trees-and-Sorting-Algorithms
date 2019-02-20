@@ -10,7 +10,6 @@ class Autocomplete(object):
         for word in self.dictionary:
             self.root.add(word)
 
-
     def get_current_items(self):
         if "*" in self.root.head:
             yield word

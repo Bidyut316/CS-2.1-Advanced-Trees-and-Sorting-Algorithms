@@ -98,7 +98,7 @@ class Trie:
 
         curr = self.head
 
-        for ch in word: #For every character in the word that we are trying adding to the dictionary
+        for ch in word: #For every character in the word that we are trying adding to the trie-dictionary
             if ch not in curr: #Iterate over the list of keys in self.head/ the current dictionary were on and if the character isnt in the keys
                 curr[ch] = {}   # we add it as another  dictionary
                 # print(curr)  # Check to see the current dictionary were on and what keys it has
