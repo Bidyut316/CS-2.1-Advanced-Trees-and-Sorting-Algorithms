@@ -111,7 +111,7 @@ class Trie:
 
     def search(self, search_word):
         if len(self.head) ==0:
-            raise ValueError(" The dictionary is empty, please ass words via the add method")
+            raise ValueError(" The dictionary is empty, please add words via the add method")
 
         curr = self.head
         for char in search_word:
