@@ -43,13 +43,13 @@ class Autocomplete(object):
 
     def autocompleteTest(self, word):
 
-        curr = self.root
+        curr = self.root.root
         for letter in word:
-            curr = cur.children.get(letter)
+            curr = curr.children.get(letter)
             if curr is None:
                 return  # No words with given prefix word
 
-        yield from curr.all_words(prefix)
+        yield from curr.all_words_from_current_node(word)
 
 
 
@@ -60,4 +60,5 @@ if __name__ == "__main__":
     # print(test.root.head)
 
     # print([(k,v) for k,v in {}.items()])
-    test.autocompleteTest('app')
+    for word in test.autocompleteTest('app'):
+       print(word)
