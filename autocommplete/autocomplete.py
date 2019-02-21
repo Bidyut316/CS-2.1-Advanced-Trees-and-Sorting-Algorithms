@@ -36,28 +36,24 @@ class Autocomplete(object):
 
         if curr_branch is None:
             curr_branch = self.root.head
-        if '*' in curr_branch and len(curr_branch)==1:
 
-            string_of_letters += ' '
-            return string_of_letters
-        print(curr_branch)
+        pprint.pprint(curr_branch)
         for letter in curr_branch:
-
             print(string_of_letters)
             if letter == '*':
-                 # print(string_of_letters)
+                string_of_letters+= " "+string_of_letters
                 continue
 
-
             else:
-                string_of_letters += letter
-                return self.letter_getter(curr_branch[letter],string_of_letters)
-            # self.letter_getter()
+                if letter is not None:
+                    string_of_letters += letter
+                    # if curr_branch[letter]
+                    yield self.letter_getter(curr_branch[letter],string_of_letters)
 
 
 if __name__ == "__main__":
     test = Autocomplete()
-    print(test.root.head)
+    # print(test.root.head)
 
     # test.autocomplete("app")
     # print([(k,v) for k,v in {}.items()])
