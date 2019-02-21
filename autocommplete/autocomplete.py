@@ -26,20 +26,19 @@ class Autocomplete(object):
                 print(autocomplete_str)
             # if len(curr)
 
-    # def looper(self):
-    def add_to_autostring(self,add_to_auto_str = '',curr_branch=None):
+    def add_to_autostring(self, add_to_auto_str='', curr_branch=None):
         # add_to_auto_str +=
         for letter, children in curr_branch.items():
-            if letter =='*':
+            if letter == '*':
                 yield letter
             else:
-                yield letter
+                # yield letter
                 print(children)
                 add_to_auto_str += letter
-                yield add_to_auto_str
+                # yield add_to_auto_str
                 yield from self.add_to_autostring(add_to_auto_str,children)
 
-    def autocompleteTest(self,word='',autocomplete_str = '',curr=None):
+    def autocompleteTest(self, word='', autocomplete_str='', curr=None):
 
         if curr is None:
             curr = self.root.head
@@ -52,9 +51,10 @@ class Autocomplete(object):
                 print('Not Found')
                 break
             curr= curr[letter]
-        for str in self.add_to_autostring(autocomplete_str, curr):
-            print(str)
-        # print(autocomplete_str)
+        # for string in self.add_to_autostring(autocomplete_str, curr):
+        #     print(string)
+        print(curr)
+        print(autocomplete_str)
 
 
 
