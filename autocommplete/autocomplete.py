@@ -30,10 +30,14 @@ class Autocomplete(object):
     def add_to_autostring(self,add_to_auto_str = '',curr_branch=None):
         # add_to_auto_str +=
         for letter, children in curr_branch.items():
-            add_to_auto_str += letter
-            print(add_to_auto_str)
-            print(letter)
-            print(children)
+            if letter =='*':
+                yield letter
+            else:
+                yield letter
+                print(children)
+                add_to_auto_str += letter
+                yield add_to_auto_str
+                yield from self.add_to_autostring(add_to_auto_str,children)
 
     def autocompleteTest(self,word='',autocomplete_str = '',curr=None):
 
@@ -48,28 +52,11 @@ class Autocomplete(object):
                 print('Not Found')
                 break
             curr= curr[letter]
-        self.add_to_autostring(autocomplete_str, curr)
-        print(autocomplete_str)
+        for str in self.add_to_autostring(autocomplete_str, curr):
+            print(str)
+        # print(autocomplete_str)
 
 
-
-    def letter_getter(self,curr_branch=None,string_of_letters=''):
-
-        if curr_branch is None:
-            curr_branch = self.root.head
-
-        pprint.pprint(curr_branch)
-        for letter in curr_branch:
-            print(string_of_letters)
-            if letter == '*':
-                # string_of_letters += " " + string_of_letters
-                print(string_of_letters)
-
-            if letter != '*':
-                string_of_letters += letter
-                self.letter_getter(curr_branch[letter], string_of_letters)
-
-            # string_of_letters += letter
 
 
 
@@ -78,4 +65,4 @@ if __name__ == "__main__":
     # print(test.root.head)
 
     # print([(k,v) for k,v in {}.items()])
-    test.autocompleteTest('apr')
+    test.autocompleteTest('app')
