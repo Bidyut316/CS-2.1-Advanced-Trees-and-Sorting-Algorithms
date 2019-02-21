@@ -11,25 +11,46 @@ class Autocomplete(object):
             self.root.add(word)
 
 
-    def autocomplete(self,word:str):
-        pprint.pprint(self.root.head)
-        autocomplete_str = ''
+    def autocomplete(self,curr=None,word='',autocomplete_str = ''):
 
-        curr = self.root.head
+        if curr is None:
+            curr = self.root.head
+
         for char in word:
-            print(curr.keys())
+            # print(curr.keys())
             if '*' in curr:
                 print("eno of word")
             if char in curr:
                 autocomplete_str += char
-                print(char)
-                pprint.pprint(curr[char])
-
                 curr = curr[char]
                 print(autocomplete_str)
             # if len(curr)
 
     # def looper(self):
+    def add_to_autostring(self,add_to_auto_str = '',curr_branch=None):
+        # add_to_auto_str +=
+        for letter, children in curr_branch.items():
+            add_to_auto_str += letter
+            print(add_to_auto_str)
+            print(letter)
+            print(children)
+
+    def autocompleteTest(self,word='',autocomplete_str = '',curr=None):
+
+        if curr is None:
+            curr = self.root.head
+
+        # if word[0] not in curr:
+        #     print('Not in here')
+        for letter in word:
+            autocomplete_str +=letter
+            if letter not in curr:
+                print('Not Found')
+                break
+            curr= curr[letter]
+        self.add_to_autostring(autocomplete_str, curr)
+        print(autocomplete_str)
+
 
 
     def letter_getter(self,curr_branch=None,string_of_letters=''):
@@ -41,20 +62,20 @@ class Autocomplete(object):
         for letter in curr_branch:
             print(string_of_letters)
             if letter == '*':
-                string_of_letters+= " "+string_of_letters
-                continue
+                # string_of_letters += " " + string_of_letters
+                print(string_of_letters)
 
-            else:
-                if letter is not None:
-                    string_of_letters += letter
-                    # if curr_branch[letter]
-                    yield self.letter_getter(curr_branch[letter],string_of_letters)
+            if letter != '*':
+                string_of_letters += letter
+                self.letter_getter(curr_branch[letter], string_of_letters)
+
+            # string_of_letters += letter
+
 
 
 if __name__ == "__main__":
     test = Autocomplete()
     # print(test.root.head)
 
-    # test.autocomplete("app")
     # print([(k,v) for k,v in {}.items()])
-    print(test.letter_getter())
+    test.autocompleteTest('apr')
