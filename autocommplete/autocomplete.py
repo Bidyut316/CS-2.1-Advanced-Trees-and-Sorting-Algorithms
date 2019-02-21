@@ -12,19 +12,53 @@ class Autocomplete(object):
 
 
     def autocomplete(self,word:str):
-        autocomplete_list = list()
+        pprint.pprint(self.root.head)
+        autocomplete_str = ''
 
         curr = self.root.head
         for char in word:
-            print(curr.values())
-            if not curr: # checking to see if the current dictionary that were in isnt just an empty dict
-                return  # No words with given prefix, aka these letters do not appear
+            print(curr.keys())
+            if '*' in curr:
+                print("eno of word")
+            if char in curr:
+                autocomplete_str += char
+                print(char)
+                pprint.pprint(curr[char])
+
+                curr = curr[char]
+                print(autocomplete_str)
+            # if len(curr)
+
+    # def looper(self):
 
 
+    def letter_getter(self,curr_branch=None,string_of_letters=''):
+
+        if curr_branch is None:
+            curr_branch = self.root.head
+        if '*' in curr_branch and len(curr_branch)==1:
+
+            string_of_letters += ' '
+            return string_of_letters
+        print(curr_branch)
+        for letter in curr_branch:
+
+            print(string_of_letters)
+            if letter == '*':
+                 # print(string_of_letters)
+                continue
+
+
+            else:
+                string_of_letters += letter
+                return self.letter_getter(curr_branch[letter],string_of_letters)
+            # self.letter_getter()
 
 
 if __name__ == "__main__":
     test = Autocomplete()
-    # print(test.root.head)
+    print(test.root.head)
+
     # test.autocomplete("app")
-    print([(k,v) for k,v in {}.items()])
+    # print([(k,v) for k,v in {}.items()])
+    print(test.letter_getter())
