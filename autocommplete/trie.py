@@ -1,5 +1,5 @@
+#!/usr/bin/python
 
-import pprint
 from charNode import CharNode
 class Trie:
     def __init__(self):
