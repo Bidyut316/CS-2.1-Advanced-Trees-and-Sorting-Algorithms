@@ -2,16 +2,17 @@
 
 
 
-def char_range(c1, c2):
-    """Generates the characters from `c1` to `c2`, inclusive."""
-    for c in range(ord(c1), ord(c2)+1):
-        yield chr(c)
-
-
 class CharNode(object):
     """This class keeps track of if a node is at the end of the tree of possible combinations"""
 
     def __init__(self):
-        self.next = dict() # Initialize and empty python dictionary that will hold references to
+        self.end = False
+        self.children = {}
 
-        self.word_marker = False
+    def all_words(self, prefix):
+        if self.end: # If youve reached the end of what we've defines as a word
+            yield prefix # Yeet this back up the call stack and keep going
+
+        for letter, childNodes in self.children.items(): # For all of the children of this current node
+            yield from childNodes.all_words(prefix + letter) # Yield all possible prefixes that could exises in those nodes and r]lather, rise, repeat
+

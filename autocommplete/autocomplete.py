@@ -28,33 +28,28 @@ class Autocomplete(object):
 
     def add_to_autostring(self, add_to_auto_str='', curr_branch=None):
         # add_to_auto_str +=
+        print(curr_branch)
         for letter, children in curr_branch.items():
             if letter == '*':
-                yield letter
+                add_to_auto_str += ' ' + add_to_auto_str
+                yield add_to_auto_str
             else:
                 # yield letter
-                print(children)
+                # print(children)
                 add_to_auto_str += letter
                 # yield add_to_auto_str
                 yield from self.add_to_autostring(add_to_auto_str,children)
 
-    def autocompleteTest(self, word='', autocomplete_str='', curr=None):
 
-        if curr is None:
-            curr = self.root.head
+    def autocompleteTest(self, word):
 
-        # if word[0] not in curr:
-        #     print('Not in here')
+        curr = self.root
         for letter in word:
-            autocomplete_str +=letter
-            if letter not in curr:
-                print('Not Found')
-                break
-            curr= curr[letter]
-        # for string in self.add_to_autostring(autocomplete_str, curr):
-        #     print(string)
-        print(curr)
-        print(autocomplete_str)
+            curr = cur.children.get(letter)
+            if curr is None:
+                return  # No words with given prefix word
+
+        yield from curr.all_words(prefix)
 
 
 

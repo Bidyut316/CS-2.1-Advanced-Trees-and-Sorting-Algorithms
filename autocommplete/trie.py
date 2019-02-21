@@ -1,9 +1,9 @@
 
 import pprint
-
+from charNode import CharNode
 class Trie:
     def __init__(self):
-        self.head = {}
+        self.root = CharNode()
 
 
                 # this represents the starting point for searching, adding, or removing words or sentences,
@@ -39,7 +39,7 @@ class Trie:
         What we also need to do is give the "a" key a value that we can store letters that come after it in the word
         In this case another empty dictionary
 
-                        self.head = {
+                        self.root = {
 
                                     "a":{}
                                     }
@@ -93,44 +93,37 @@ class Trie:
 
 
         :param word: A string that we want to add its letter references to the current tree
-        :return: Nothing, but modifies self. head with new dictonary entries
+        :return: Nothing, but modifies self. head with new charNode entries
         """
 
-        curr = self.head
+        curr = self.root
+        for ch in word: # For every character in the word that we are trying adding to the trie-node reference
+            node = curr.children.get(ch) # Check to see if the character is in the dictionary of children Charnodes
+            if not node: # If it comes back that there is no child with that key
+                node = CharNode() # Declare the  node as a new charnode
+                curr.children[ch] = node # creep down to the nest lever of the trie and continue until word is added
+            curr = node
+        curr.end = True # This sets to true for the sole purpose of the next few methods win which this determines the end of a word
 
-        for ch in word: #For every character in the word that we are trying adding to the trie-dictionary
-            if ch not in curr: #Iterate over the list of keys in self.head/ the current dictionary were on and if the character isnt in the keys
-                curr[ch] = {}   # we add it as another  dictionary
-                # print(curr)  # Check to see the current dictionary were on and what keys it has
-            curr = curr[ch] #  Either way check for the next iteration of the for loop it wil now reference
-
-        curr["*"]= True
-        # pprint.pprint(self.head)
-        # pprint.pprint(curr)
 
 
     def search(self, search_word):
-        if len(self.head) ==0:
+        if len(self.root.children) =={}:
             raise ValueError(" The dictionary is empty, please add words via the add method")
+        curr = self.root
+        for letter in search_word: #loop over every letter in the word that we're searching in
+            node = curr.children.get(letter) #attempt to see if the letter is in thechildren of this trie level
+            if not node: # if the letter isnt represented in the trie
+                return False # return false as it means this word doesnt exist in the trie
+            curr = node # creep down to the next level of the trie
+        return curr.end
 
-        curr = self.head
-        for char in search_word:
-            if char not in curr:
-                return False # this will short circut and return early if, for this iteration, the character is not in the keys
-            curr = curr[char]   # if it is in the keys then for the nest letter its curr will be a list of keys that it was found
-                                # having dropped into its dictionary via the add method
 
-        # pprint.pprint(self.head)
-        # pprint.pprint(curr)
-        if "*" in curr:
-            return True
-        else:
-            return False
 
 
 if __name__ == "__main__":
         trieTest = Trie()
-        print(trieTest.head)
+        print(trieTest.root.children)
         # trieTest.search("word")
         trieTest.add("add")
         # pprint.pprint(trieTest.head)
