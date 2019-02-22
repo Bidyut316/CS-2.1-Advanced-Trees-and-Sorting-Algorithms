@@ -2,9 +2,14 @@
 class RBNode(object):
     """
     Class for implementing the nodes that the tree will use
+    For self.color:
+        red == False
+        black == True
+        If the node is a leaf it will either
     """
-    def __init__(self):
-        self.color=''
+    def __init__(self,data):
+        self.black = False
+        self.data = data
         self.left = None
         self.right = None
 
@@ -12,11 +17,22 @@ class RedBlackTree(object):
     """
     Class for implementing a standard red-black trees
     """
-    def __init__(self):
-        self.root =RBNode()
+    def __init__(self,data):
+        self.root = RBNode(data)
+        self.root.black = True
 
-    def add(self):
+    def add(self,data):
+        curr = self.root
+        if data > curr.data:
+            if curr.right is None:
+                curr.right = RBNode(data)
+        if data < curr.data:
+            if curr.left is None:
+                curr.left = RBNode(data)
         pass
+    def contain(self):
+        pass
+
     def delete(self):
         pass
     def rotate_left(self):
@@ -29,3 +45,7 @@ class RedBlackTree(object):
         pass
     def get_black_nodes(self):
         pass
+
+
+if __name__ == "__main__":
+    tree = RedBlackTree()
