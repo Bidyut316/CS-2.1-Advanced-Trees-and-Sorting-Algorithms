@@ -22,12 +22,13 @@ class RedBlackTree(object):
         self.root.black = True
 
     def add(self,data,curr = None):
-        if curr is None:
+        if not curr :
             curr = self.root
         if data > curr.data:
             if curr.right is None:
                 curr.right = RBNode(data)
             else:
+                pass
                 # while curr.right is not None:
 
         if data < curr.data:
