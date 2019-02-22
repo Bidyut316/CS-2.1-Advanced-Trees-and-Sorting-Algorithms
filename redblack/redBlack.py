@@ -7,8 +7,9 @@ class RBNode(object):
         black == True
         If the node is a leaf it will either
     """
-    def __init__(self,data):
+    def __init__(self,data,parent):
         self.black = False
+        self.parent = parent
         self.data = data
         self.left = None
         self.right = None
