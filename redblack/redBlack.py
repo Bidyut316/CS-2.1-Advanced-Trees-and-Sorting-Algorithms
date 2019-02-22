@@ -1,5 +1,8 @@
 #!/usr/bin/python
 class RBNode(object):
+    """
+    Class for implementing the nodes that the tree will use
+    """
     def __init__(self):
         self.color=''
         self.left = None
@@ -15,6 +18,10 @@ class RedBlackTree(object):
     def add(self):
         pass
     def delete(self):
+        pass
+    def rotate_left(self):
+        pass
+    def rotate_right(self):
         pass
     def get_all_nodes(self):
         pass
