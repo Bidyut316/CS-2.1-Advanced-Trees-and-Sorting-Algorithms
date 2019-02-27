@@ -9,6 +9,7 @@ class RBNode(object):
     """
     def __init__(self,data,parent):
         self.black = False
+        self.red = False
         self.parent = parent
         self.data = data
         self.left = None
@@ -23,6 +24,12 @@ class RedBlackTree(object):
         self.root.black = True
 
     def add(self,data,curr = None):
+        """
+
+        :param data:
+        :param curr:
+        :return:
+        """
         if not curr :
             curr = self.root
         if data > curr.data:
@@ -37,20 +44,49 @@ class RedBlackTree(object):
                 curr.left = RBNode(data)
         pass
     def contain(self):
+        """
+
+        :return:
+        """
         pass
 
     def delete(self):
+        """
+
+        :return:
+        """
         pass
     def rotate_left(self):
+        """
+
+        :return:
+        """
         pass
     def rotate_right(self):
+        """
+
+        :return:
+        """
         pass
     def get_all_nodes(self):
+        """
+
+        :return:
+        """
         pass
-    def get_red_nodes(self):
-        pass
-    def get_black_nodes(self):
-        pass
+    def is_red(self):
+        """
+
+        :return:
+        """
+        return self.root != None && self.root.red == 1;
+    def is_black(self):
+        """
+        Note that this method is not neccsary as some implementations only check is the is_red class method is True or False
+        :return:
+        True if the node is black or is a leaf
+        """
+        return self.root != None & & self.root.black == 1;
 
 
 if __name__ == "__main__":
