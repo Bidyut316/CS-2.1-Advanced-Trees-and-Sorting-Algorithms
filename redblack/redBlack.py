@@ -1,11 +1,15 @@
 #!/usr/bin/python
 
 class NilNode(object):
+    """
+    The nil class is specifically for balancing a tree by giving all  traditional leaf noes tw children that are null
+     and waiting to be filled
+    """
     def __init__(self):
         self.red = False
 
-"""We define NIL to be the leaf sentinel of our tree."""
-NIL = NilNode()
+
+NIL = NilNode() # Nil is the sentinel value for nodes
 
 
 class RBNode(object):
