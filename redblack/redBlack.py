@@ -31,35 +31,36 @@ class RedBlackTree(object):
     """
     Class for implementing a standard red-black trees
     """
-    def __init__(self,data):
+    def __init__(self):
         self.root = None
-        self.root.black = True
-
     def add(self,data,curr = None):
         """
 
-        :param data:
+        :param data: an int, float, or any other comparable value
         :param curr:
         :return: None but midifies tree to have an additional node
         """
-        newNode= RBNode(data)
-        curr = self.root
-        while curr !=NIL:
-            if newNode.data < curr.data:
-                curr = curr.left
+        new_node = RBNode(data)
+        # Base Case - Nothing in the tree
+        if self.root == None:
+            new_node.red = False
+            self.root = new_node
+            return
+        # Search to find the node's correct place
+        currentNode = self.root
+        while currentNode != None:
+            potentialParent = currentNode
+            if new_node.data < currentNode.data:
+                currentNode = currentNode.left
             else:
-                curr = curr.right
-        newNode.parent = curr
-        if curr == None:
-            self.root = newNode
-        elif newNode.data < curr.data:
-            curr.left = newNode
+                currentNode = currentNode.right
+        # Assign parents and siblings to the new node
+        new_node.parent = potentialParent
+        if new_node.data < new_node.parent.data:
+            new_node.parent.left = new_node
         else:
-            curr._right = newNode
-        newNode.left =NIL
-        newNode.right =NIL
-        newNode.red = True
-        self.fix_tree_after_add(newNode)
+            new_node.parent.right = new_node
+        self.fix_tree_after_add(new_node)
 
     def contains(self,data, curr=None):
         """
@@ -75,14 +76,50 @@ class RedBlackTree(object):
                 curr = curr.right
         return curr
 
-    def fix_tree_after_add(self):
+    def fix_tree_after_add(self,new_node):
         """
-        This method is meant to check that a treee is still balances after and insertion and perform the neccesary left
-        or right rotations as defined by the methods below
-
+        This method is meant to check and rebalnce a tree back to satisfying all of the red-black properties
         :return:
         None, but modifiex tree
         """
+        while new_node.parent.red == True and new_node != self.root:
+            if new_node.parent == new_node.parent.parent.left:
+                uncle = new_node.parent.parent.right
+                if uncle.red:
+                    # This is Case 1
+                    new_node.parent.red = False
+                    uncle.red = False
+                    new_node.parent.parent.red = True
+                    new_node = new_node.parent.parent
+                else:
+                    if new_node == new_node.parent.right:
+                        # This is Case 2
+                        new_node = new_node.parent
+                        self.left_rotate(new_node)
+                    # This is Case 3
+                    new_node.parent.red = False
+                    new_node.parent.parent.red = True
+                    self.right_rotate(new_node.parent.parent)
+            else:
+                uncle = new_node.parent.parent.left
+                if uncle.red:
+                    # Case 1
+                    new_node.parent.red = False
+                    uncle.red = False
+                    new_node.parent.parent.red = True
+                    new_node = new_node.parent.parent
+                else:
+                    if new_node == new_node.parent.left:
+                        # Case 2
+                        new_node = new_node.parent
+                        self.right_rotate(new_node)
+                    # Case 3
+                    new_node.parent.red = False
+                    new_node.parent.parent.red = True
+                    self.left_rotate(new_node.parent.parent)
+        self.root.red = False
+
+
 
     def delete(self):
         """
@@ -90,18 +127,51 @@ class RedBlackTree(object):
         :return:
         """
         pass
-    def rotate_left(self):
+    def rotate_left(self,new_node):
         """
 
         :return:
         """
-        pass
-    def rotate_right(self):
+        print("Rotating left!")
+
+        sibling = new_node.right
+        new_node.right = sibling.left
+        # Turn sibling's left subtree into node's right subtree
+        if sibling.left != None:
+            sibling.left.parent = new_node
+        sibling.parent = new_node.parent
+        if new_node.parent == None:
+            self.root = sibling
+        else:
+            if new_node == new_node.parent.left:
+                new_node.parent.left = sibling
+            else:
+                new_node.parent.right = sibling
+        sibling.left = new_node
+        new_node.parent = sibling
+
+    def rotate_right(self,new_node):
         """
 
         :return:
         """
-        pass
+        print("Rotating right!")
+        sibling = new_node.left
+        new_node.right = sibling.right
+        # Turn sibling's left subtree into node's right subtree
+        if sibling.right != None:
+            sibling.right.parent = new_node
+        sibling.parent = new_node.parent
+        if new_node.parent == None:
+            self.root = sibling
+        else:
+            if new_node == new_node.parent.right:
+                new_node.parent.right = sibling
+            else:
+                new_node.parent.left = sibling
+        sibling.right = new_node
+        new_node.parent = sibling
+
     def get_all_nodes(self):
         """
 
@@ -116,15 +186,21 @@ class RedBlackTree(object):
 
         :return:
         """
-        return self.root != None && self.root.red == 1;
+        return self.root != None and self.root.red == 1;
     def is_black(self):
         """
         Note that this method is not necessary as some implementations only check is the is_red class method is True or False
         :return:
         True if the node is black or is a leaf
         """
-        return self.root != None & & self.root.black == 1;
+        return self.root != None and self.root.black == 1;
 
 
 if __name__ == "__main__":
     tree = RedBlackTree()
+    tree.add(1)
+    # print(tree.root)
+    tree.add(3)
+    tree.add(4)
+    tree.add(3)
+    tree.add(4)
