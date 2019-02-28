@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="155ca489-b368-4d22-ab4c-0dae9f6f7ee3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/autocommplete/trie.py" beforeDir="false" afterPath="$PROJECT_DIR$/autocommplete/trie.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/redblack/redBlack.py" beforeDir="false" afterPath="$PROJECT_DIR$/redblack/redBlack.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -58,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/autocommplete/trie.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1434">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
+            <state relative-caret-position="311">
+              <caret line="133" column="23" lean-forward="true" selection-start-line="124" selection-start-column="4" selection-end-line="133" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -67,8 +68,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/redblack/redBlack.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="139">
-              <caret line="76" column="21" lean-forward="true" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+            <state relative-caret-position="266">
+              <caret line="39" column="66" selection-start-line="39" selection-start-column="66" selection-end-line="39" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -76,13 +77,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/autocommplete/charNode.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="17" selection-end-line="1" />
+            <state relative-caret-position="270">
+              <caret line="18" lean-forward="true" selection-start-line="4" selection-end-line="18" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>x</find>
+      <find>self.nil</find>
+      <find>z.key</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -93,8 +101,8 @@
         <option value="$PROJECT_DIR$/Code/sorting_recursive.py" />
         <option value="$PROJECT_DIR$/Code/trie.py" />
         <option value="$PROJECT_DIR$/autocommplete/charNode.py" />
-        <option value="$PROJECT_DIR$/autocommplete/trie.py" />
         <option value="$PROJECT_DIR$/autocommplete/autocomplete.py" />
+        <option value="$PROJECT_DIR$/autocommplete/trie.py" />
         <option value="$PROJECT_DIR$/redblack/redBlack.py" />
       </list>
     </option>
@@ -175,12 +183,12 @@
       <option name="presentableId" value="Default" />
       <updated>1548954785526</updated>
       <workItem from="1548954791294" duration="3817000" />
-      <workItem from="1550360396159" duration="36135000" />
+      <workItem from="1550360396159" duration="39975000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39952000" />
+    <option name="totallyTimeSpent" value="43792000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="20" y="43" width="1400" height="757" extended-state="0" />
@@ -258,20 +266,6 @@
     <entry file="file://$PROJECT_DIR$/Code/priorityqueue.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/autocommplete/charNode.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="17" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/autocommplete/trie.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1434">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/autocommplete/autocomplete.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -279,10 +273,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/autocommplete/charNode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" lean-forward="true" selection-start-line="4" selection-end-line="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/autocommplete/trie.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="133" column="23" lean-forward="true" selection-start-line="124" selection-start-column="4" selection-end-line="133" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/redblack/redBlack.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="76" column="21" lean-forward="true" selection-start-line="76" selection-start-column="21" selection-end-line="76" selection-end-column="21" />
+        <state relative-caret-position="266">
+          <caret line="39" column="66" selection-start-line="39" selection-start-column="66" selection-end-line="39" selection-end-column="66" />
         </state>
       </provider>
     </entry>

@@ -1,4 +1,13 @@
 #!/usr/bin/python
+
+class NilNode(object):
+    def __init__(self):
+        self.red = False
+
+"""We define NIL to be the leaf sentinel of our tree."""
+NIL = NilNode()
+
+
 class RBNode(object):
     """
     Class for implementing the nodes that the tree will use
@@ -7,10 +16,9 @@ class RBNode(object):
         black == True
         If the node is a leaf it will either
     """
-    def __init__(self,data,parent):
-        self.black = False
+    def __init__(self,data):
         self.red = False
-        self.parent = parent
+        self.parent = None
         self.data = data
         self.left = None
         self.right = None
@@ -20,7 +28,7 @@ class RedBlackTree(object):
     Class for implementing a standard red-black trees
     """
     def __init__(self,data):
-        self.root = RBNode(data)
+        self.root = None
         self.root.black = True
 
     def add(self,data,curr = None):
@@ -28,27 +36,49 @@ class RedBlackTree(object):
 
         :param data:
         :param curr:
-        :return:
+        :return: None but midifies tree to have an additional node
         """
-        if not curr :
-            curr = self.root
-        if data > curr.data:
-            if curr.right is None:
-                curr.right = RBNode(data)
+        newNode= RBNode(data)
+        curr = self.root
+        while curr !=NIL:
+            if newNode.data < curr.data:
+                curr = curr.left
             else:
-                pass
-                # while curr.right is not None:
+                curr = curr.right
+        newNode.parent = curr
+        if curr == None:
+            self.root = newNode
+        elif newNode.data < curr.data:
+            curr.left = newNode
+        else:
+            curr._right = newNode
+        newNode.left =NIL
+        newNode.right =NIL
+        newNode.red = True
+        self.fix_tree_after_add(newNode)
 
-        if data < curr.data:
-            if curr.left is None:
-                curr.left = RBNode(data)
-        pass
-    def contain(self):
+    def contains(self,data, curr=None):
         """
 
         :return:
         """
-        pass
+        if curr == None:
+            curr = self.root
+        while curr != NIL and data != curr.key:
+            if data < curr.data:
+                curr = curr.left
+            else:
+                curr = curr.right
+        return curr
+
+    def fix_tree_after_add(self):
+        """
+        This method is meant to check that a treee is still balances after and insertion and perform the neccesary left
+        or right rotations as defined by the methods below
+
+        :return:
+        None, but modifiex tree
+        """
 
     def delete(self):
         """
@@ -76,13 +106,16 @@ class RedBlackTree(object):
         pass
     def is_red(self):
         """
+        This is the class that usually decides that a node is wither red or black, some implementations take the ecurrtra
+        bit and will implement an is_black method for additional clarity.
+        Generally, True == Red and False == Black
 
         :return:
         """
         return self.root != None && self.root.red == 1;
     def is_black(self):
         """
-        Note that this method is not neccsary as some implementations only check is the is_red class method is True or False
+        Note that this method is not necessary as some implementations only check is the is_red class method is True or False
         :return:
         True if the node is black or is a leaf
         """
