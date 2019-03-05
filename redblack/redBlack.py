@@ -24,8 +24,8 @@ class RBNode(object):
         self.red = False
         self.parent = None
         self.data = data
-        self.left = None
-        self.right = None
+        self.left = NIL
+        self.right = NIL
 
 class RedBlackTree(object):
     """
@@ -33,6 +33,7 @@ class RedBlackTree(object):
     """
     def __init__(self):
         self.root = None
+        self.size =0
     def add(self,data,curr = None):
         """
 
@@ -40,6 +41,7 @@ class RedBlackTree(object):
         :param curr:
         :return: None but midifies tree to have an additional node
         """
+        self.size += 1
         new_node = RBNode(data)
         # Base Case - Nothing in the tree
         if self.root == None:
@@ -48,7 +50,7 @@ class RedBlackTree(object):
             return
         # Search to find the node's correct place
         currentNode = self.root
-        while currentNode != None:
+        while currentNode != NIL:
             potentialParent = currentNode
             if new_node.data < currentNode.data:
                 currentNode = currentNode.left
@@ -69,7 +71,7 @@ class RedBlackTree(object):
         """
         if curr == None:
             curr = self.root
-        while curr != NIL and data != curr.key:
+        while curr != NIL and data != curr.data:
             if data < curr.data:
                 curr = curr.left
             else:
@@ -82,6 +84,7 @@ class RedBlackTree(object):
         :return:
         None, but modifiex tree
         """
+        print("Tree is being fixed!")
         while new_node.parent.red == True and new_node != self.root:
             if new_node.parent == new_node.parent.parent.left:
                 uncle = new_node.parent.parent.right
@@ -204,3 +207,5 @@ if __name__ == "__main__":
     tree.add(4)
     tree.add(3)
     tree.add(4)
+    print(tree.contains(3))
+    print(tree.root)
