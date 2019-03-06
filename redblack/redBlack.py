@@ -130,7 +130,7 @@ class RedBlackTree(object):
         :return:
         """
         pass
-    def rotate_left(self,new_node):
+    def left_rotate(self,new_node):
         """
 
         :return:
@@ -153,7 +153,7 @@ class RedBlackTree(object):
         sibling.left = new_node
         new_node.parent = sibling
 
-    def rotate_right(self,new_node):
+    def right_rotate(self,new_node):
         """
 
         :return:

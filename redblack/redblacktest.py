@@ -64,7 +64,6 @@ class TestInsert(unittest.TestCase):
         test_BST = BinarySearchTree()
         test_tree = RedBlackTree()
 
-        for 
 
 
 
