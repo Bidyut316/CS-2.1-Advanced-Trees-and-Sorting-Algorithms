@@ -1,5 +1,5 @@
 #!python
-
+from sorting_iterative import *
 
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
@@ -47,6 +47,17 @@ def split_sort_merge(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half using any other sorting algorithm
     # TODO: Merge sorted halves into one list in sorted order
+    # lwft half of the array
+    left = items[0:middle]
+    # middle half of the array
+    middle = int((len(items)) / 2)
+    # right half of the array
+    right = items[middle:len(items)]
+    # playing with multiple combionation to find the best running time
+    insertion_sort(left)
+    selection_sort(right)
+    # combine the two orted arrays
+    return merge(left, right)
 
 
 def merge_sort(items):
@@ -58,6 +69,21 @@ def merge_sort(items):
     # TODO: Split items list into approximately equal halves
     # TODO: Sort each half by recursively calling merge sort
     # TODO: Merge sorted halves into one list in sorted order
+    if len(items) == 1 or len(items) == 0:
+        return items
+        # no integer division needed
+        # middle = len(items)//2
+
+    middle = int((len(items)) / 2)
+    # 2 hlaves of the original list
+    right = items[middle:len(items)]
+
+    left = items[0:middle]
+
+    merge_sort(left)
+    merge_sort(right)
+    # not supposed to return somthing so was changed
+    items[:] = merge(left, right)
 
 
 def partition(items, low, high):
@@ -72,6 +98,27 @@ def partition(items, low, high):
     # TODO: Move items less than pivot into front of range [low...p-1]
     # TODO: Move items greater than pivot into back of range [p+1...high]
     # TODO: Move pivot item into final position [p] and return index p
+    pivot_value = items[low]
+    left_mark = low + 1
+    right_mark = high
+    done = False
+    while not done:
+        while left_mark <= right_mark and \
+                items[left_mark] <= pivot_value:
+            left_mark = left_mark + 1
+        while items[right_mark] >= pivot_value and \
+                right_mark >= left_mark:
+            right_mark = right_mark - 1
+        if right_mark < left_mark:
+            done = True
+        else:
+            temp = items[left_mark]
+            items[left_mark] = items[right_mark]
+            items[right_mark] = temp
+    temp = items[low]
+    items[low] = items[right_mark]
+    items[right_mark] = temp
+    return right_mark
 
 
 def quick_sort(items, low=None, high=None):
@@ -84,3 +131,18 @@ def quick_sort(items, low=None, high=None):
     # TODO: Check if list or range is so small it's already sorted (base case)
     # TODO: Partition items in-place around a pivot and get index of pivot
     # TODO: Sort each sublist range by recursively calling quick sort
+    # need to add a case to check for invalid input but not sure how...hmmmm
+    # if low wasnt passed in as a parameter, set it to a zero(begiining index forthe partition)
+    if low == None:
+        low = 0
+    # if high is none then for the partition set it to the end of the listposition for the partition
+    if high == None:
+        high = len(items)
+    #
+    if low < high:
+        pivot = partition(items, low, high)
+
+        quick_sort(items, pivot + 1, high)
+        quick_sort(items, low, pivot - 1)
+
+    return items
