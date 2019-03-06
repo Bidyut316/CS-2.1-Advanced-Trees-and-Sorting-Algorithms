@@ -11,7 +11,31 @@ def merge(items1, items2):
     # TODO: Append remaining items in non-empty list to new list
     index_0_list_1 = 0
     index_0_list_2 = 0
-    sorted_list = list()
+    final_sorted_list = []
+    # stops when wither list one of list two is empty
+    # runs slightly faster if list 1 comes first so redoing
+    # while index_0_list_2 < len(items2) and index_0_list_1 < len(items1) :
+    while index_0_list_1 < len(items1) and index_0_list_2 < len(items2):
+        # Needs to find the minimum value first before comparisons
+        min_list_1 = items1[index_0_list_1]
+        min_list_2 = items2[index_0_list_2]
+        # if the minumum of list 1 is smaller than the minimum of list two then min 1 is appened,
+        # otherwise min 2 is appended, this should continue untill both are sorted
+        if min_list_1 < min_list_2:
+            final_sorted_list.append(min_list_1)
+            index_0_list_1 += 1
+        else:
+            final_sorted_list.append(min_list_2)
+            index_0_list_2 += 1
+    # At this pint all of the itmes should be in the right places
+    # return final_sorted_list
+    # apparently this isnt the casse, forgot to add the items left in the lists as part of the algoritm
+    if index_0_list_1 != len(items1):
+        final_sorted_list.extend(items1[index_0_list_1:len(items1)])
+    else:
+        final_sorted_list.extend(items2[index_0_list_2:len(items2)])
+
+    return final_sorted_list
 
 
 def split_sort_merge(items):
