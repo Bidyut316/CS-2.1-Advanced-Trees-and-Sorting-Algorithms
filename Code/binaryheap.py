@@ -23,6 +23,10 @@ class BinaryMinHeap(object):
         """Return True if this heap is empty, or False otherwise."""
         # TODO: Check if empty based on how many items are in the list
         # ...
+        if self.items == []: # Basically if it is an empty list
+            return True #Then return true saying that is is empyt
+
+        return False # return flase
 
     def size(self):
         """Return the number of items in this heap."""
